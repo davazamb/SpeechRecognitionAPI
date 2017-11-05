@@ -30,29 +30,29 @@ namespace SpeechWPF
             InitializeComponent();
             RecordButton.Content = "Iniciar\nGrabacion";
             _FinalResponseEvent = new AutoResetEvent(false);
-            OutputTextBox.Background = Brushes.White;
-            OutputTextBox.Foreground = Brushes.Black;
+            OutputTextbox.Background = Brushes.White;
+            OutputTextbox.Foreground = Brushes.Black;
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void RecordButton_Click(object sender, RoutedEventArgs e)
         {
             RecordButton.Content = "Escuchando...";
             RecordButton.IsEnabled = false;
-            OutputTextBox.Background = Brushes.Green;
-            OutputTextBox.Foreground = Brushes.White;
+            OutputTextbox.Background = Brushes.Green;
+            OutputTextbox.Foreground = Brushes.White;
             ConvertSpeechToText();
         }
 
         private void ConvertSpeechToText()
         {
             var speechRecognitionMode = SpeechRecognitionMode.ShortPhrase;
-            string language = "en-us";
+            string language = "es-es";
             string subscriptionkey = ConfigurationManager.AppSettings["SpeechKey"].ToString();
 
 
             _microphoneRecognitionClient = SpeechRecognitionServiceFactory.CreateMicrophoneClient
-                ( speechRecognitionMode, language, subscriptionkey);
+                (speechRecognitionMode, language, subscriptionkey);
 
             _microphoneRecognitionClient.OnPartialResponseReceived += OnPartialResponseReceivedHandler;
             _microphoneRecognitionClient.OnResponseReceived += OnMicShortPhraseResponseReceivedHandler;
@@ -60,21 +60,32 @@ namespace SpeechWPF
 
         }
 
-        private void OnMicShortPhraseResponseReceivedHandler(object sender, SpeechResponseEventArgs e)
+        private void OnPartialResponseReceivedHandler(object sender, PartialSpeechResponseEventArgs e)
         {
             string result = e.PartialResult;
             Dispatcher.Invoke(() =>
                 {
-                    OutputTextBox.Text = (e.PartialResult);
-                    OutputTextBox.Text += ("\n");
+                    OutputTextbox.Text = (e.PartialResult);
+                    OutputTextbox.Text += ("\n");
 
 
                 });
         }
 
-        private void OnPartialResponseReceivedHandler(object sender, PartialSpeechResponseEventArgs e)
+        private void OnMicShortPhraseResponseReceivedHandler(object sender, SpeechResponseEventArgs e)
         {
-            throw new NotImplementedException();
+            Dispatcher.Invoke((Action)(() =>
+            {
+                _FinalResponseEvent.Set();
+                _microphoneRecognitionClient.EndMicAndRecognition();
+                _microphoneRecognitionClient.Dispose();
+                _microphoneRecognitionClient = null;
+                RecordButton.Content = "Iniciar\nGrabacion";
+                RecordButton.IsEnabled = true;
+                OutputTextbox.Background = Brushes.White;
+                OutputTextbox.Foreground = Brushes.Black;
+
+            }));
         }
     }
 }

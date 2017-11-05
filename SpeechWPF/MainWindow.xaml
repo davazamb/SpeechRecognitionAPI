@@ -6,9 +6,8 @@
         xmlns:local="clr-namespace:SpeechWPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="93,259,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.472,1.527" AutomationProperties.Name="RecordButton" Click="Button_Click"/>
-        <TextBox HorizontalAlignment="Left" Height="105" Margin="56,92,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="369" AutomationProperties.Name="OutputTextBox"/>
-
-    </Grid>
+    <StackPanel Name="MainStackPanel" Orientation="Vertical" VerticalAlignment="Top">
+        <Button Name="RecordButton" Width="250" Height="100" FontSize="32" VerticalAlignment="Top" Click="RecordButton_Click">Start!</Button>
+        <TextBox Name="OutputTextbox" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="18" Height="86"/>
+    </StackPanel>
 </Window>
