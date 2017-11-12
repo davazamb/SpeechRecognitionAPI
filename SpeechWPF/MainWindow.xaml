@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpeechWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="318.951" Width="525" WindowStartupLocation="CenterScreen">
     <StackPanel Name="MainStackPanel" Orientation="Vertical" VerticalAlignment="Top">
-        <Button Name="RecordButton" Width="250" Height="100" FontSize="32" VerticalAlignment="Top" Click="RecordButton_Click">Start!</Button>
-        <TextBox Name="OutputTextbox" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="18" Height="86"/>
+        <Button Name="RecordButton" Height="109" FontSize="32" VerticalAlignment="Top" Click="RecordButton_Click" Margin="134,0,119,0">Start!</Button>
+        <TextBox Name="OutputTextbox" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="18" Height="157"/>
     </StackPanel>
 </Window>

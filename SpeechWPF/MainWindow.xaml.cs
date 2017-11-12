@@ -68,6 +68,7 @@ namespace SpeechWPF
                     OutputTextbox.Text = (e.PartialResult);
                     OutputTextbox.Text += ("\n");
 
+                    
 
                 });
         }
