@@ -7,6 +7,33 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="3"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock FontSize="24" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="4">BingSpeechToText</TextBlock>
+        <Button x:Name="button" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Click="button_click" Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Margin="4" Height="75">
+            <Button.Content>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock FontSize="16">Speak</TextBlock>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        <TextBlock x:Name="status" TextWrapping="Wrap" Text="Not Listening" VerticalAlignment="Center" FontSize="16" Visibility="Collapsed" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Margin="4"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <TextBlock x:Name="MySpeechResponse" FontSize="20" Margin="4" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>
+            <TextBlock x:Name="MySpeechResponseConfidence" FontSize="12" Margin="4" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="RecordingBar" Visibility="Collapsed" Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="3">
+            <ProgressBar HorizontalAlignment="Left" Width="207" Margin="0,16,0,0" IsIndeterminate="True"></ProgressBar>
+        </StackPanel>
     </Grid>
 </Window>
